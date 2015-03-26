@@ -355,7 +355,13 @@ class File implements \ArrayAccess, \IteratorAggregate, \Countable
             if ($count > 1) {
                 $result = array();
                 foreach ($this->objects as $object) {
-                    $result[] = call_user_func_array(array($object, $name), $arguments);
+                    if (strpos($name, 'set') !== false && isset($arguments[0][$index])) {
+                        $local_arguments = array($arguments[0][$index]);
+                    } else {
+                        $local_arguments = $arguments;
+                    }
+
+                    $result[] = call_user_func_array(array($object, $name), $local_arguments);
                 }
             } else {
                 $result = call_user_func_array(array($this->objects[0], $name), $arguments);
