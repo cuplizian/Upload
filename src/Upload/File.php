@@ -354,7 +354,7 @@ class File implements \ArrayAccess, \IteratorAggregate, \Countable
         if ($count) {
             if ($count > 1) {
                 $result = array();
-                foreach ($this->objects as $object) {
+                foreach ($this->objects as $index => $object) {
                     if (strpos($name, 'set') !== false && isset($arguments[0][$index])) {
                         $local_arguments = array($arguments[0][$index]);
                     } else {
